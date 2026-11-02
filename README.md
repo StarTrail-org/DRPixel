@@ -8,12 +8,12 @@
 <!-- Link the title to the arXiv page once it is public. -->
 
 <p align="center">
-  Tiansheng Hu<sup>N</sup>,
-  Yichuan Wang<sup>B</sup>,
-  James V. Talwar<sup>R</sup>,
-  Nicholas Tomlin<sup>T</sup>,
-  Chen Zhao<sup>NY</sup>,
-  Sewon Min<sup>B</sup>
+  <a href="https://hughiehu.github.io/">Tiansheng Hu</a><sup>N</sup>,
+  <a href="https://yichuan-w.github.io/">Yichuan Wang</a><sup>B</sup>,
+  <a href="https://jvtalwar.github.io/dk-isle/">James V. Talwar</a><sup>R</sup>,
+  <a href="https://nickatomlin.github.io/">Nicholas Tomlin</a><sup>T</sup>,
+  <a href="https://henryzhao5852.github.io/">Chen Zhao</a><sup>NY</sup>,
+  <a href="https://www.sewonmin.com/">Sewon Min</a><sup>B</sup>
 </p>
 <p align="center"><sub>
   <sup>N</sup>NYU Shanghai &nbsp;
