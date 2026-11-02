@@ -22,7 +22,8 @@ TEXT_MAX_CHARS = 2200        # just above the 90th percentile of passage length 
 
 
 def _compat():
-    """(unresolved docs, docs without a PDF, docs that fail a page search, {row: page_idx or None})."""
+    """Settings from paper_compat.json, read only when PAPER_COMPAT=1: (docs returned without a page,
+    docs returned with a placeholder image, docs whose page search raises, {row: page_idx or None})."""
     if os.environ.get("PAPER_COMPAT", "0") != "1":
         return set(), set(), set(), {}
     c = json.load(open(os.path.join(HERE, "paper_compat.json")))
@@ -146,7 +147,7 @@ class PageRetriever:
         top = _topk(self.X, self.enc.encode(query), k)
         bad = [self.rows[i][0] for i, _ in top if self.rows[i][0] in self.error_docs]
         if bad:
-            raise FileNotFoundError("source files missing for %s" % bad[0])
+            raise FileNotFoundError("page search unavailable for %s" % bad[0])
         out = []
         for i, score in top:
             doc, corpus, _ = self.rows[i]

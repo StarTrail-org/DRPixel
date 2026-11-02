@@ -188,10 +188,9 @@ def _payload(results):
     """How many returned hits actually carried evidence?
 
     A hit with neither text nor an image is a search that cost a turn and returned nothing the
-    model could read. That happens for real — a doc whose OCR chunk is empty, or a figure hit
-    with no crop behind it — and it is invisible in `Tool/q`, which counts the call either way.
-    An endpoint serving thin payloads therefore looks exactly like a weak model, so the rate is
-    reported rather than left to be discovered.
+    model could read. It is invisible in `Tool/q`, which counts the call either way. An endpoint
+    serving thin payloads therefore looks exactly like a weak model, so the rate is reported rather
+    than left to be discovered.
     """
     empty = total = 0
     for r in results:

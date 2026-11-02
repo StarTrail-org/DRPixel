@@ -94,13 +94,13 @@ def test_paper_compat(data, tmp_path, monkeypatch):
     _compat(tmp_path, monkeypatch, unresolved_docs=["d2"], no_pdf_docs=["d3"], page_rows={"1": None})
     r = retriever.make("page", "cpu", d, FixedEncoder([1, 1, 1, 0]))
     hits = {(h["doc"], h.get("page_idx")): h for h in r.search("q", k=4)}
-    assert ("d2", None) in hits and "image" not in hits[("d2", None)]          # unresolved: no page, no image
-    assert hits[("d3", 5)]["image"] != pngs[3] and hits[("d3", 5)]["image"].startswith(b"\x89PNG")   # no PDF: blank page
-    assert ("d1", None) in hits and hits[("d1", 0)]["image"] == pngs[0]       # row 1 overridden to no page
+    assert ("d2", None) in hits and "image" not in hits[("d2", None)]          # no page, no image
+    assert hits[("d3", 5)]["image"] != pngs[3] and hits[("d3", 5)]["image"].startswith(b"\x89PNG")   # placeholder image
+    assert ("d1", None) in hits and hits[("d1", 0)]["image"] == pngs[0]       # row 1 mapped to no page
     monkeypatch.setenv("TEXT_INDEX_DEVICE", "cpu")
     t = retriever.make("text", "cpu", d, FixedEncoder([0, 1, 0, 0]))
-    assert t.search("q", k=1)[0]["text"] == ""                                # unresolved: empty passage
+    assert t.search("q", k=1)[0]["text"] == ""                                # empty passage
     _compat(tmp_path, monkeypatch, error_docs=["d3"])
     r = retriever.make("page", "cpu", d, FixedEncoder([0, 0, 1, 0]))
-    with pytest.raises(FileNotFoundError):                                    # missing source files: search fails
+    with pytest.raises(FileNotFoundError):                                    # search raises
         r.search("q", k=1)
